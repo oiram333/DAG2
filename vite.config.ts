@@ -5,7 +5,7 @@ import AutoImport from "unplugin-auto-import/vite";
 // import { readdyJsxRuntimeProxyPlugin } from "./vite.jsx-runtime-proxy";
 
 // GitHub Pages project site base path
-const base = "/Sistemasagrijuasa-prog/";
+const base = "/DAG2/";
 const isPreview = process.env.IS_PREVIEW ? true : false;
 //const proxyPlugins = isPreview ? [readdyJsxRuntimeProxyPlugin()] : [];
 // https://vite.dev/config/
