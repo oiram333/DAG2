@@ -1,0 +1,191 @@
+=== GUÍA DE NOMBRES PARA FOTOS DE PROYECTOS ===
+
+Meté tus fotos en esta carpeta (public/projects/) con estos nombres exactos.
+
+Las fotos que existan acá se verán automáticamente en el sitio.
+Las que falten seguirán mostrando las imágenes de internet.
+
+--- PROYECTOS 1-10 ---
+
+1. Oficinas de Capacitación de Personal
+   oficinas_capacitacion_1.jpg  (foto principal / hero)
+   oficinas_capacitacion_2.jpg  (galería)
+   oficinas_capacitacion_3.jpg  (galería)
+   oficinas_capacitacion_4.jpg  (galería)
+   oficinas_capacitacion_5.jpg  (galería)
+
+2. Trincheras para Cableado Eléctrico
+   trincheras_electricas_1.jpg  (hero)
+   trincheras_electricas_2.jpg  (galería)
+   trincheras_electricas_3.jpg  (galería)
+   trincheras_electricas_4.jpg  (galería)
+
+3. Área de Lactancia
+   area_lactancia_1.jpg  (hero)
+   area_lactancia_2.jpg  (galería)
+   area_lactancia_3.jpg  (galería)
+   area_lactancia_4.jpg  (galería)
+   area_lactancia_5.jpg  (galería)
+   area_lactancia_6.jpg  (galería)
+
+4. Mantenimiento Eléctrico
+   mantenimiento_electrico_1.jpg  (hero)
+   mantenimiento_electrico_2.jpg  (galería)
+   mantenimiento_electrico_3.jpg  (galería)
+   mantenimiento_electrico_4.jpg  (galería)
+   mantenimiento_electrico_5.jpg  (galería)
+
+5. Pintura Epóxica en Cocina y Alacena
+   cocina_alacena_1.jpg  (hero)
+   cocina_alacena_2.jpg  (galería)
+   cocina_alacena_3.jpg  (galería)
+   cocina_alacena_4.jpg  (galería)
+   cocina_alacena_5.jpg  (galería)
+
+6. Pintura Epóxica Exterior - Área de Enfermería
+   enfermeria_exterior_1.jpg  (hero)
+   enfermeria_exterior_2.jpg  (galería)
+   enfermeria_exterior_3.jpg  (galería)
+   enfermeria_exterior_4.jpg  (galería)
+   enfermeria_exterior_5.jpg  (galería)
+   enfermeria_exterior_6.jpg  (galería)
+   enfermeria_exterior_7.jpg  (galería)
+
+7. Pintura Epóxica Exterior - Área de Descarga
+   descarga_exterior_1.jpg  (hero)
+   descarga_exterior_2.jpg  (galería)
+   descarga_exterior_3.jpg  (galería)
+   descarga_exterior_4.jpg  (galería)
+   descarga_exterior_5.jpg  (galería)
+   descarga_exterior_6.jpg  (galería)
+
+8. Ampliación en Cochera de Casa Habitación
+   cochera_celaya_1.jpg  (hero)
+   cochera_celaya_2.jpg  (galería)
+   cochera_celaya_3.jpg  (galería)
+   cochera_celaya_4.jpg  (galería)
+   cochera_celaya_5.jpg  (galería)
+   cochera_celaya_6.jpg  (galería)
+
+9. Elevador de Material en Área de Almacén
+   elevador_almacen_1.jpg  (hero)
+   elevador_almacen_2.jpg  (galería)
+   elevador_almacen_3.jpg  (galería)
+   elevador_almacen_4.jpg  (galería)
+   elevador_almacen_5.jpg  (galería)
+   elevador_almacen_6.jpg  (galería)
+   elevador_almacen_7.jpg  (galería)
+
+10. Pintura Epóxica en Interior de Nave
+    pintura_interior_1.jpg  (hero)
+    pintura_interior_2.jpg  (galería)
+    pintura_interior_3.jpg  (galería)
+    pintura_interior_4.jpg  (galería)
+    pintura_interior_5.jpg  (galería)
+    pintura_interior_6.jpg  (galería)
+    pintura_interior_7.jpg  (galería)
+    pintura_interior_8.jpg  (galería)
+    pintura_interior_9.jpg  (galería)
+
+--- PROYECTOS 11-20 ---
+
+11. Trampa de Grasas
+    trampa_grasas_1.jpg  (hero)
+    trampa_grasas_2.jpg  (galería)
+    trampa_grasas_3.jpg  (galería)
+    trampa_grasas_4.jpg  (galería)
+    trampa_grasas_5.jpg  (galería)
+    trampa_grasas_6.jpg  (galería)
+
+12. Bodega de Almacenamiento
+    bodega_almacenamiento_1.jpg  (hero)
+    bodega_almacenamiento_2.jpg  (galería)
+    bodega_almacenamiento_3.jpg  (galería)
+    bodega_almacenamiento_4.jpg  (galería)
+    bodega_almacenamiento_5.jpg  (galería)
+    bodega_almacenamiento_6.jpg  (galería)
+    bodega_almacenamiento_7.jpg  (galería)
+    bodega_almacenamiento_8.jpg  (galería)
+    bodega_almacenamiento_9.jpg  (galería)
+    bodega_almacenamiento_10.jpg (galería)
+    bodega_almacenamiento_11.jpg (galería)
+
+13. Terraza
+    terraza_1.jpg  (hero)
+    terraza_2.jpg  (galería)
+    terraza_3.jpg  (galería)
+    terraza_4.jpg  (galería)
+    terraza_5.jpg  (galería)
+    terraza_6.jpg  (galería)
+    terraza_7.jpg  (galería)
+
+14. Monumento Institucional
+    monumento_institucional_1.jpg  (hero)
+    monumento_institucional_2.jpg  (galería)
+    monumento_institucional_3.jpg  (galería)
+    monumento_institucional_4.jpg  (galería)
+    monumento_institucional_5.jpg  (galería)
+    monumento_institucional_6.jpg  (galería)
+    monumento_institucional_7.jpg  (galería)
+    monumento_institucional_8.jpg  (galería)
+
+15. Sala de Orgullo Lince
+    sala_orgullo_lince_1.jpg  (hero)
+    sala_orgullo_lince_2.jpg  (galería)
+    sala_orgullo_lince_3.jpg  (galería)
+    sala_orgullo_lince_4.jpg  (galería)
+    sala_orgullo_lince_5.jpg  (galería)
+    sala_orgullo_lince_6.jpg  (galería)
+
+16. Sala de Titulación
+    sala_titulacion_1.jpg  (hero)
+    sala_titulacion_2.jpg  (galería)
+    sala_titulacion_3.jpg  (galería)
+    sala_titulacion_4.jpg  (galería)
+    sala_titulacion_5.jpg  (galería)
+    sala_titulacion_6.jpg  (galería)
+
+17. Tienda 3B
+    tienda_3b_1.jpg  (hero)
+    tienda_3b_2.jpg  (galería)
+    tienda_3b_3.jpg  (galería)
+    tienda_3b_4.jpg  (galería)
+    tienda_3b_5.jpg  (galería)
+    tienda_3b_6.jpg  (galería)
+
+18. Sala de Titulación Campus II del TECN
+    sala_titulacion_campus2_1.jpg  (hero)
+    sala_titulacion_campus2_2.jpg  (galería)
+    sala_titulacion_campus2_3.jpg  (galería)
+    sala_titulacion_campus2_4.jpg  (galería)
+    sala_titulacion_campus2_5.jpg  (galería)
+    sala_titulacion_campus2_6.jpg  (galería)
+    sala_titulacion_campus2_7.jpg  (galería)
+    sala_titulacion_campus2_8.jpg  (galería)
+    sala_titulacion_campus2_9.jpg  (galería)
+    sala_titulacion_campus2_10.jpg (galería)
+    sala_titulacion_campus2_11.jpg (galería)
+
+19. Casa Habitación
+    casa_habitacion_1.jpg  (hero)
+    casa_habitacion_2.jpg  (galería)
+    casa_habitacion_3.jpg  (galería)
+    casa_habitacion_4.jpg  (galería)
+    casa_habitacion_5.jpg  (galería)
+    casa_habitacion_6.jpg  (galería)
+    casa_habitacion_7.jpg  (galería)
+    casa_habitacion_8.jpg  (galería)
+    casa_habitacion_9.jpg  (galería)
+    casa_habitacion_10.jpg (galería)
+    casa_habitacion_11.jpg (galería)
+
+20. REHAU Celaya
+    rehau_celaya_1.jpg  (hero)
+
+=== INSTRUCCIONES ===
+1. Descargá el proyecto completo como ZIP.
+2. Meté tus fotos en esta carpeta public/projects/ con los nombres de arriba.
+3. Subí el proyecto de vuelta a Readdy.
+4. Las fotos que pusiste se verán automáticamente. Las que falten usan las imágenes de internet.
+
+IMPORTANTE: los nombres deben coincidir EXACTAMENTE, incluyendo mayúsculas/minúsculas.
