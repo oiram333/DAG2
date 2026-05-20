@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface ProjectImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   fallbackSrc: string;
@@ -10,6 +10,13 @@ export default function ProjectImage({ src, fallbackSrc, alt, className, ...prop
     (src && String(src).trim()) ? String(src) : ((fallbackSrc && String(fallbackSrc).trim()) ? String(fallbackSrc) : undefined)
   );
   const [failed, setFailed] = useState(false);
+
+  // Actualizar currentSrc cuando cambia la prop src
+  useEffect(() => {
+    const newSrc = (src && String(src).trim()) ? String(src) : ((fallbackSrc && String(fallbackSrc).trim()) ? String(fallbackSrc) : undefined);
+    setCurrentSrc(newSrc);
+    setFailed(false);
+  }, [src, fallbackSrc]);
 
   if (!currentSrc || failed) {
     return (
