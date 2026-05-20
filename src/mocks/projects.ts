@@ -386,7 +386,7 @@ export const projectDetails = [
   {
     id: 18,
     slug: 'sala-titulacion-campus2',
-    title: 'Sala de Titulación en el Campus II del TECN',
+    title: 'Sala de Titulación en el Campus II del TECNM',
     category: 'Comercial',
     client: 'Instituto Tecnológico de Celaya',
     location: 'Celaya, Gto.',
@@ -443,7 +443,7 @@ export const projectDetails = [
     contact: 'Arq. Antonio Velazquez Lomas',
     image: '',
     images: [],
-    description: 'Adecuación de oficinas administrativas en área de mantenimiento a base de muros divisiorios de tablaroca, plafones reticulares; adecuación de instalación eléctrica, sistema de aires acondicionados y acabados en general.',
+    description: 'Adecuación de oficinas administrativas en área de mantenimiento a base de muros divisorios de tablaroca, plafones reticulares; adecuación de instalación eléctrica, sistema de aires acondicionados y acabados en general.',
     scope: [
       'Diseño de distribución de oficinas',
       'Muros divisorios de tablaroca',

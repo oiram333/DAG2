@@ -8,7 +8,7 @@ const categories = ['Todos', 'Industrial', 'Residencial', 'Mantenimiento', 'Come
 
 function ProjectCard({ project, index, visible }: { project: typeof projectDetails[0]; index: number; visible: boolean }) {
   const validImages = useValidLocalImages(project.id);
-  const heroLocal = validImages[0] || '';
+  const heroLocal = validImages[validImages.length - 1] || '';
 
   return (
     <Link

@@ -294,7 +294,7 @@ export default function ProjectDetail() {
 
 function RelatedProjectCard({ project }: { project: typeof projectDetails[0] }) {
   const validImages = useValidLocalImages(project.id);
-  const heroImage = validImages[0] || '';
+  const heroImage = validImages[validImages.length - 1] || '';
 
   return (
     <Link
