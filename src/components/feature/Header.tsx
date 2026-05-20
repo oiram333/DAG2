@@ -45,13 +45,13 @@ export default function Header() {
 
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-black/95 border-b border-white/10 backdrop-blur-md' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-[190px] md:h-[200px]">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20 md:h-24">
         <a href="/" onClick={goHome} className="flex items-center group leading-[0]">
-          <div className="h-[180px] flex items-center justify-center leading-[0]">
+          <div className="bg-black/60 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-2 flex items-center justify-center leading-[0]">
             <img
               alt="DAG2 Construcciones Logo"
-              className="h-full w-auto object-contain"
-              src="https://storage.readdy-site.link/project_files/02c32817-8248-40ea-9a96-6d2ba401544b/e05b4835-80e4-457e-88bf-2bb810f739fd_DAG2.png?v=e39a859bb68c17890e057d199986c9d8"
+              className="h-10 md:h-12 w-auto object-contain"
+              src="https://public.readdy.ai/ai/img_res/ef605304-4f02-44d9-aa8e-e7bb8aba49f6.png"
             />
           </div>
         </a>

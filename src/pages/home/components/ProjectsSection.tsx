@@ -1,10 +1,51 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projectDetails } from '@/mocks/projects';
-import { getLocalImagePaths } from '@/utils/projectLocalPaths';
+import { useValidLocalImages } from '@/hooks/useValidLocalImages';
 import ProjectImage from '@/components/ProjectImage';
 
 const categories = ['Todos', 'Industrial', 'Residencial', 'Mantenimiento', 'Comercial'];
+
+function ProjectCard({ project, index, visible }: { project: typeof projectDetails[0]; index: number; visible: boolean }) {
+  const validImages = useValidLocalImages(project.id);
+  const heroLocal = validImages[0] || '';
+
+  return (
+    <Link
+      to={`/proyecto/${project.slug}`}
+      className={`group relative overflow-hidden cursor-pointer bg-[#111] border border-[#1e1e1e] hover:border-[#c0c0c0]/30 transition-all duration-500 ${visible ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'}`}
+      style={{ transitionDelay: visible ? `${index * 100}ms` : '0ms' }}
+    >
+      <div className="relative overflow-hidden h-44 md:h-56">
+        <ProjectImage
+          alt={project.title}
+          className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+          fallbackSrc=""
+          src={heroLocal}
+        />
+        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
+        <span className="absolute top-3 left-3 md:top-4 md:left-4 text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-[#c0c0c0] bg-black/60 px-2 py-1 md:px-3 md:py-1 border border-[#c0c0c0]/30">
+          {project.category}
+        </span>
+      </div>
+      <div className="p-4 md:p-6">
+        <h3 className="text-base md:text-xl font-bold text-white tracking-wider group-hover:text-[#c0c0c0] transition-colors duration-300 mb-2">
+          {project.title}
+        </h3>
+        <div className="flex flex-wrap items-center gap-2 text-[#555] text-xs">
+          <i className="ri-map-pin-line text-[#c0c0c0]/50"></i>
+          <span>{project.location}</span>
+          <span className="mx-2 text-[#333] hidden sm:inline">·</span>
+          <span className="hidden sm:inline">{project.year}</span>
+        </div>
+        <div className="flex items-center gap-2 mt-3 md:mt-4 text-[#888] text-xs tracking-wider uppercase group-hover:text-[#c0c0c0] transition-colors">
+          <span>Ver Proyecto</span>
+          <i className="ri-arrow-right-line"></i>
+        </div>
+      </div>
+    </Link>
+  );
+}
 
 export default function ProjectsSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -50,46 +91,9 @@ export default function ProjectsSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
-          {filtered.map((project, index) => {
-            const localPaths = getLocalImagePaths(project.id);
-            const heroLocal = localPaths[0] || '';
-            return (
-              <Link
-                to={`/proyecto/${project.slug}`}
-                key={project.id}
-                className={`group relative overflow-hidden cursor-pointer bg-[#111] border border-[#1e1e1e] hover:border-[#c0c0c0]/30 transition-all duration-500 ${visible ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'}`}
-                style={{ transitionDelay: visible ? `${index * 100}ms` : '0ms' }}
-              >
-                <div className="relative overflow-hidden h-44 md:h-56">
-                  <ProjectImage
-                    alt={project.title}
-                    className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-                    fallbackSrc=""
-                    src={heroLocal}
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
-                  <span className="absolute top-3 left-3 md:top-4 md:left-4 text-[9px] md:text-[10px] tracking-[0.3em] uppercase text-[#c0c0c0] bg-black/60 px-2 py-1 md:px-3 md:py-1 border border-[#c0c0c0]/30">
-                    {project.category}
-                  </span>
-                </div>
-                <div className="p-4 md:p-6">
-                  <h3 className="text-base md:text-xl font-bold text-white tracking-wider group-hover:text-[#c0c0c0] transition-colors duration-300 mb-2">
-                    {project.title}
-                  </h3>
-                  <div className="flex flex-wrap items-center gap-2 text-[#555] text-xs">
-                    <i className="ri-map-pin-line text-[#c0c0c0]/50"></i>
-                    <span>{project.location}</span>
-                    <span className="mx-2 text-[#333] hidden sm:inline">·</span>
-                    <span className="hidden sm:inline">{project.year}</span>
-                  </div>
-                  <div className="flex items-center gap-2 mt-3 md:mt-4 text-[#888] text-xs tracking-wider uppercase group-hover:text-[#c0c0c0] transition-colors">
-                    <span>Ver Proyecto</span>
-                    <i className="ri-arrow-right-line"></i>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+          {filtered.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} visible={visible} />
+          ))}
         </div>
 
         <p className="text-[#444] text-xs tracking-widest text-center mt-8 md:mt-12 uppercase">

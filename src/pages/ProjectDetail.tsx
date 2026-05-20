@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projectDetails } from '@/mocks/projects';
-import { getLocalImagePaths } from '@/utils/projectLocalPaths';
+import { useValidLocalImages } from '@/hooks/useValidLocalImages';
 import ProjectImage from '@/components/ProjectImage';
 import Header from '@/components/feature/Header';
 import Footer from '@/components/feature/Footer';
@@ -12,6 +12,7 @@ export default function ProjectDetail() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const validImages = useValidLocalImages(project?.id ?? 0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -47,8 +48,7 @@ export default function ProjectDetail() {
     );
   }
 
-  const localPaths = getLocalImagePaths(project.id);
-  const allImages = localPaths.length > 0 ? localPaths : [];
+  const heroImage = validImages[0] || '';
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
@@ -62,7 +62,7 @@ export default function ProjectDetail() {
               alt={project.title}
               className="w-full h-full object-cover object-top"
               fallbackSrc=""
-              src={localPaths[0] || ''}
+              src={heroImage}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40" />
           </div>
@@ -182,9 +182,9 @@ export default function ProjectDetail() {
               </h3>
             </div>
 
-            {allImages.length > 0 ? (
+            {validImages.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
-                {allImages.map((img, i) => (
+                {validImages.map((img, i) => (
                   <button
                     key={i}
                     onClick={() => setLightboxIndex(i)}
@@ -213,7 +213,7 @@ export default function ProjectDetail() {
         </section>
 
         {/* Lightbox */}
-        {lightboxIndex !== null && allImages.length > 0 && (
+        {lightboxIndex !== null && validImages.length > 0 && (
           <div
             className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
             onClick={() => setLightboxIndex(null)}
@@ -228,7 +228,7 @@ export default function ProjectDetail() {
               className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-3xl transition-colors cursor-pointer z-50"
               onClick={(e) => {
                 e.stopPropagation();
-                setLightboxIndex(lightboxIndex === 0 ? allImages.length - 1 : lightboxIndex - 1);
+                setLightboxIndex(lightboxIndex === 0 ? validImages.length - 1 : lightboxIndex - 1);
               }}
             >
               <i className="ri-arrow-left-s-line"></i>
@@ -237,7 +237,7 @@ export default function ProjectDetail() {
               className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-3xl transition-colors cursor-pointer z-50"
               onClick={(e) => {
                 e.stopPropagation();
-                setLightboxIndex(lightboxIndex === allImages.length - 1 ? 0 : lightboxIndex + 1);
+                setLightboxIndex(lightboxIndex === validImages.length - 1 ? 0 : lightboxIndex + 1);
               }}
             >
               <i className="ri-arrow-right-s-line"></i>
@@ -247,10 +247,10 @@ export default function ProjectDetail() {
                 alt={`${project.title} - Foto ${lightboxIndex + 1}`}
                 className="w-full max-h-[70vh] md:max-h-[80vh] object-contain"
                 fallbackSrc=""
-                src={allImages[lightboxIndex]}
+                src={validImages[lightboxIndex]}
               />
               <p className="text-center text-[#888] text-xs tracking-widest mt-4 uppercase">
-                {lightboxIndex + 1} / {allImages.length}
+                {lightboxIndex + 1} / {validImages.length}
               </p>
             </div>
           </div>
@@ -279,34 +279,9 @@ export default function ProjectDetail() {
               {projectDetails
                 .filter((p) => p.id !== project.id)
                 .slice(0, 3)
-                .map((p) => {
-                  const pLocal = getLocalImagePaths(p.id);
-                  return (
-                    <Link
-                      key={p.id}
-                      to={`/proyecto/${p.slug}`}
-                      className="group bg-[#111] border border-[#1e1e1e] hover:border-[#c0c0c0]/30 transition-all duration-500 overflow-hidden"
-                    >
-                      <div className="relative overflow-hidden h-44 md:h-48">
-                        <ProjectImage
-                          alt={p.title}
-                          className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                          fallbackSrc=""
-                          src={pLocal[0] || ''}
-                        />
-                        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
-                      </div>
-                      <div className="p-4 md:p-5">
-                        <span className="text-[10px] tracking-[0.3em] uppercase text-[#c0c0c0] border border-[#c0c0c0]/20 px-2 py-0.5">
-                          {p.category}
-                        </span>
-                        <h4 className="text-base md:text-lg font-bold text-white tracking-wider mt-3 group-hover:text-[#c0c0c0] transition-colors duration-300">
-                          {p.title}
-                        </h4>
-                      </div>
-                    </Link>
-                  );
-                })}
+                .map((p) => (
+                  <RelatedProjectCard key={p.id} project={p} />
+                ))}
             </div>
           </div>
         </section>
@@ -314,5 +289,35 @@ export default function ProjectDetail() {
 
       <Footer />
     </div>
+  );
+}
+
+function RelatedProjectCard({ project }: { project: typeof projectDetails[0] }) {
+  const validImages = useValidLocalImages(project.id);
+  const heroImage = validImages[0] || '';
+
+  return (
+    <Link
+      to={`/proyecto/${project.slug}`}
+      className="group bg-[#111] border border-[#1e1e1e] hover:border-[#c0c0c0]/30 transition-all duration-500 overflow-hidden"
+    >
+      <div className="relative overflow-hidden h-44 md:h-48">
+        <ProjectImage
+          alt={project.title}
+          className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+          fallbackSrc=""
+          src={heroImage}
+        />
+        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
+      </div>
+      <div className="p-4 md:p-5">
+        <span className="text-[10px] tracking-[0.3em] uppercase text-[#c0c0c0] border border-[#c0c0c0]/20 px-2 py-0.5">
+          {project.category}
+        </span>
+        <h4 className="text-base md:text-lg font-bold text-white tracking-wider mt-3 group-hover:text-[#c0c0c0] transition-colors duration-300">
+          {project.title}
+        </h4>
+      </div>
+    </Link>
   );
 }
