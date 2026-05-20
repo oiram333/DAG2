@@ -45,18 +45,14 @@ export default function Header() {
 
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-black/95 border-b border-white/10 backdrop-blur-md' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
-        <a href="/" onClick={goHome} className="flex items-center gap-3 group">
-          <div className="w-16 h-16 flex items-center justify-center">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-[190px] md:h-[200px]">
+        <a href="/" onClick={goHome} className="flex items-center group leading-[0]">
+          <div className="h-[180px] flex items-center justify-center leading-[0]">
             <img
-              alt="DAG2 Logo"
-              className="w-full h-full object-cover"
-              src="https://storage.readdy-site.link/project_files/02c32817-8248-40ea-9a96-6d2ba401544b/13bfb51b-e23d-4447-a5f2-9c012e0a9f97_Copilot_20260512_173000.png?v=d6b7605c7d2f1c11bcfa6590c2029479"
+              alt="DAG2 Construcciones Logo"
+              className="h-full w-auto object-contain"
+              src="https://storage.readdy-site.link/project_files/02c32817-8248-40ea-9a96-6d2ba401544b/e05b4835-80e4-457e-88bf-2bb810f739fd_DAG2.png?v=e39a859bb68c17890e057d199986c9d8"
             />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-white font-bold text-base leading-tight tracking-tight">DAG2</span>
-            <span className="text-[#555] text-[10px] leading-tight tracking-[0.2em] uppercase">Construcciones</span>
           </div>
         </a>
 

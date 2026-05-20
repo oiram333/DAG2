@@ -104,9 +104,6 @@ export default function ContactSection() {
               <a href={contactInfo.social.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center border border-[#222] text-[#666] hover:text-[#c0c0c0] hover:border-[#c0c0c0]/40 transition-all duration-300 cursor-pointer">
                 <i className="ri-facebook-circle-line text-base"></i>
               </a>
-              <a href={contactInfo.social.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center border border-[#222] text-[#666] hover:text-[#c0c0c0] hover:border-[#c0c0c0]/40 transition-all duration-300 cursor-pointer">
-                <i className="ri-linkedin-box-line text-base"></i>
-              </a>
             </div>
           </div>
 

@@ -31,23 +31,23 @@ export default function HeroSection() {
       </div>
 
       <div className={`relative z-10 text-center px-6 max-w-5xl mx-auto w-full transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        <div className="inline-block mb-8">
-          <div className="w-20 h-px bg-gradient-to-r from-transparent via-[#c0c0c0] to-transparent mx-auto mb-6" />
-          <div className="w-64 h-64 mx-auto flex items-center justify-center">
+        <div className="inline-block mb-3 md:mb-4">
+          <div className="w-20 h-px bg-gradient-to-r from-transparent via-[#c0c0c0] to-transparent mx-auto mb-3 md:mb-4" />
+          <div className="w-56 h-56 md:w-80 md:h-80 mx-auto flex items-center justify-center">
             <img
               alt="DAG2 Construcciones Logo"
-              className="w-full h-full object-cover"
-              src="https://storage.readdy-site.link/project_files/02c32817-8248-40ea-9a96-6d2ba401544b/13bfb51b-e23d-4447-a5f2-9c012e0a9f97_Copilot_20260512_173000.png?v=d6b7605c7d2f1c11bcfa6590c2029479"
+              className="w-full h-full object-contain"
+              src="https://storage.readdy-site.link/project_files/02c32817-8248-40ea-9a96-6d2ba401544b/e05b4835-80e4-457e-88bf-2bb810f739fd_DAG2.png?v=e39a859bb68c17890e057d199986c9d8"
             />
           </div>
-          <div className="w-20 h-px bg-gradient-to-r from-transparent via-[#c0c0c0] to-transparent mx-auto mt-6" />
+          <div className="w-20 h-px bg-gradient-to-r from-transparent via-[#c0c0c0] to-transparent mx-auto mt-3 md:mt-4" />
         </div>
 
-        <p className="text-xl md:text-3xl text-[#d0d0d0] tracking-[0.3em] uppercase mt-8 font-light">
+        <p className="text-lg md:text-2xl text-[#d0d0d0] tracking-[0.3em] uppercase mt-4 md:mt-5 font-light">
           Diseño &nbsp;·&nbsp; Gestión &nbsp;·&nbsp; Construcción
         </p>
 
-        <p className="text-[#777] text-sm md:text-base mt-6 max-w-lg mx-auto leading-relaxed tracking-wide">
+        <p className="text-[#777] text-sm md:text-base mt-4 md:mt-5 max-w-lg mx-auto leading-relaxed tracking-wide">
           Transformamos ideas en estructuras que perduran. Soluciones integrales en arquitectura, gestión y construcción de alto nivel.
         </p>
 

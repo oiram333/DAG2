@@ -154,8 +154,7 @@ export const contactInfo = {
   address: 'Aguilar y Maya #108 pte, Col. Alameda, C.P. 38050 Celaya, Gto.',
   whatsappNumber: '524616132140',
   social: {
-    facebook: 'https://facebook.com/dag2construcciones',
-    instagram: 'https://instagram.com/dag2construcciones',
-    linkedin: 'https://linkedin.com/company/dag2construcciones',
+    facebook: 'https://www.facebook.com/share/1EE9V6PtBu/',
+    instagram: 'https://www.instagram.com/dag2_co?igsh=MjdkZjQyMGo2Z3o3',
   },
 };

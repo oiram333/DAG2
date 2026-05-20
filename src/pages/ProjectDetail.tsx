@@ -33,9 +33,9 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-black text-white font-sans flex items-center justify-center">
+      <div className="min-h-screen bg-black text-white font-sans flex items-center justify-center px-4">
         <div className="text-center">
-          <h1 className="text-4xl font-black text-white mb-4">Proyecto no encontrado</h1>
+          <h1 className="text-3xl md:text-4xl font-black text-white mb-4">Proyecto no encontrado</h1>
           <Link
             to="/"
             className="text-[#c0c0c0] hover:text-white text-sm tracking-[0.2em] uppercase border border-[#c0c0c0]/40 px-6 py-3 inline-block transition-all duration-300"
@@ -48,8 +48,7 @@ export default function ProjectDetail() {
   }
 
   const localPaths = getLocalImagePaths(project.id);
-  const remoteImages = [project.image, ...project.images];
-  const allImages = localPaths.length > 0 ? localPaths : remoteImages;
+  const allImages = localPaths.length > 0 ? localPaths : [];
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
@@ -57,30 +56,30 @@ export default function ProjectDetail() {
 
       <main>
         {/* Hero */}
-        <section className="relative min-h-[70vh] flex items-end overflow-hidden">
+        <section className="relative min-h-[50vh] md:min-h-[70vh] flex items-end overflow-hidden">
           <div className="absolute inset-0">
             <ProjectImage
               alt={project.title}
               className="w-full h-full object-cover object-top"
-              fallbackSrc={project.image}
-              src={localPaths[0] || project.image}
+              fallbackSrc=""
+              src={localPaths[0] || ''}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40" />
           </div>
 
-          <div ref={heroRef} className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-16">
+          <div ref={heroRef} className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-12 pb-10 md:pb-16">
             <div className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <Link
                 to="/#proyectos"
-                className="text-[#888] hover:text-[#c0c0c0] text-xs tracking-[0.2em] uppercase mb-6 inline-flex items-center gap-2 transition-colors duration-300"
+                className="text-[#888] hover:text-[#c0c0c0] text-xs tracking-[0.2em] uppercase mb-4 md:mb-6 inline-flex items-center gap-2 transition-colors duration-300"
               >
                 <span className="w-6 h-px bg-[#888]" />
                 Proyectos
               </Link>
-              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight mb-4">
+              <h1 className="text-2xl md:text-4xl lg:text-6xl font-black text-white leading-tight tracking-tight mb-4">
                 {project.title}
               </h1>
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[#888] text-xs tracking-wider">
+              <div className="flex flex-wrap items-center gap-x-4 md:gap-x-6 gap-y-2 text-[#888] text-xs tracking-wider">
                 <span className="text-[#c0c0c0] border border-[#c0c0c0]/30 px-3 py-1">
                   {project.category}
                 </span>
@@ -102,14 +101,14 @@ export default function ProjectDetail() {
         </section>
 
         {/* Descripción */}
-        <section className="py-20 bg-[#0a0a0a]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+        <section className="py-12 md:py-20 bg-[#0a0a0a]">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-16">
               <article className="lg:col-span-2">
                 <h2 className="text-xs tracking-[0.5em] text-[#666] uppercase mb-6">
                   Descripción del Proyecto
                 </h2>
-                <p className="text-[#bbb] text-lg leading-relaxed mb-10">
+                <p className="text-[#bbb] text-base md:text-lg leading-relaxed mb-8 md:mb-10">
                   {project.description}
                 </p>
 
@@ -132,7 +131,7 @@ export default function ProjectDetail() {
               </article>
 
               <aside className="lg:col-span-1">
-                <div className="border border-[#1e1e1e] p-8 sticky top-28">
+                <div className="border border-[#1e1e1e] p-6 md:p-8 lg:sticky lg:top-28">
                   <h3 className="text-xs tracking-[0.4em] text-[#666] uppercase mb-6">
                     Detalles del Proyecto
                   </h3>
@@ -174,52 +173,59 @@ export default function ProjectDetail() {
         </section>
 
         {/* Galería de Fotos */}
-        <section className="py-20 bg-black">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="mb-16">
+        <section className="py-12 md:py-20 bg-black">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-12">
+            <div className="mb-10 md:mb-16">
               <h2 className="text-xs tracking-[0.5em] text-[#666] uppercase mb-4">Galería</h2>
-              <h3 className="text-4xl md:text-5xl font-black text-white leading-none">
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-none">
                 Fotos del <span className="text-[#c0c0c0]">Proyecto</span>
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
-              {allImages.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setLightboxIndex(i)}
-                  className="group relative bg-[#111] border border-[#1e1e1e] overflow-hidden cursor-pointer text-left"
-                >
-                  <ProjectImage
-                    alt={`${project.title} - Foto ${i + 1}`}
-                    className="w-full h-64 md:h-72 object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                    fallbackSrc={remoteImages[i] || project.image}
-                    src={img}
-                  />
-                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500" />
-                  <div className="absolute bottom-4 left-4 z-10 bg-black/70 text-[#c0c0c0] text-[10px] tracking-[0.3em] uppercase px-3 py-1.5 border border-[#c0c0c0]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Ver Foto {i + 1}
-                  </div>
-                </button>
-              ))}
-            </div>
+            {allImages.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
+                {allImages.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setLightboxIndex(i)}
+                    className="group relative bg-[#111] border border-[#1e1e1e] overflow-hidden cursor-pointer text-left"
+                  >
+                    <ProjectImage
+                      alt={`${project.title} - Foto ${i + 1}`}
+                      className="w-full h-52 md:h-64 lg:h-72 object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                      fallbackSrc=""
+                      src={img}
+                    />
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500" />
+                    <div className="absolute bottom-4 left-4 z-10 bg-black/70 text-[#c0c0c0] text-[10px] tracking-[0.3em] uppercase px-3 py-1.5 border border-[#c0c0c0]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      Ver Foto {i + 1}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-16 md:py-24 border border-[#1e1e1e]">
+                <i className="ri-image-line text-[#333] text-4xl mb-4 block"></i>
+                <p className="text-[#555] text-sm tracking-wider uppercase">Fotos del proyecto próximamente</p>
+              </div>
+            )}
           </div>
         </section>
 
         {/* Lightbox */}
-        {lightboxIndex !== null && (
+        {lightboxIndex !== null && allImages.length > 0 && (
           <div
             className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
             onClick={() => setLightboxIndex(null)}
           >
             <button
-              className="absolute top-6 right-6 text-white/60 hover:text-white text-3xl transition-colors cursor-pointer z-50"
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-white/60 hover:text-white text-3xl transition-colors cursor-pointer z-50"
               onClick={() => setLightboxIndex(null)}
             >
               <i className="ri-close-line"></i>
             </button>
             <button
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-3xl transition-colors cursor-pointer z-50"
+              className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-3xl transition-colors cursor-pointer z-50"
               onClick={(e) => {
                 e.stopPropagation();
                 setLightboxIndex(lightboxIndex === 0 ? allImages.length - 1 : lightboxIndex - 1);
@@ -228,7 +234,7 @@ export default function ProjectDetail() {
               <i className="ri-arrow-left-s-line"></i>
             </button>
             <button
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-3xl transition-colors cursor-pointer z-50"
+              className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-3xl transition-colors cursor-pointer z-50"
               onClick={(e) => {
                 e.stopPropagation();
                 setLightboxIndex(lightboxIndex === allImages.length - 1 ? 0 : lightboxIndex + 1);
@@ -236,11 +242,11 @@ export default function ProjectDetail() {
             >
               <i className="ri-arrow-right-s-line"></i>
             </button>
-            <div className="max-w-5xl w-full mx-4" onClick={(e) => e.stopPropagation()}>
+            <div className="max-w-5xl w-full mx-2 md:mx-4" onClick={(e) => e.stopPropagation()}>
               <ProjectImage
                 alt={`${project.title} - Foto ${lightboxIndex + 1}`}
-                className="w-full max-h-[80vh] object-contain"
-                fallbackSrc={remoteImages[lightboxIndex] || project.image}
+                className="w-full max-h-[70vh] md:max-h-[80vh] object-contain"
+                fallbackSrc=""
                 src={allImages[lightboxIndex]}
               />
               <p className="text-center text-[#888] text-xs tracking-widest mt-4 uppercase">
@@ -251,25 +257,25 @@ export default function ProjectDetail() {
         )}
 
         {/* Otros Proyectos */}
-        <section className="py-20 bg-[#0a0a0a]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="flex items-end justify-between mb-12">
+        <section className="py-12 md:py-20 bg-[#0a0a0a]">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-12">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-4">
               <div>
                 <h2 className="text-xs tracking-[0.5em] text-[#666] uppercase mb-4">Portafolio</h2>
-                <h3 className="text-3xl md:text-4xl font-black text-white">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white">
                   Más <span className="text-[#c0c0c0]">Proyectos</span>
                 </h3>
               </div>
               <Link
                 to="/#proyectos"
-                className="hidden md:flex items-center gap-2 text-[#888] hover:text-[#c0c0c0] text-xs tracking-[0.2em] uppercase transition-colors duration-300"
+                className="flex items-center gap-2 text-[#888] hover:text-[#c0c0c0] text-xs tracking-[0.2em] uppercase transition-colors duration-300"
               >
                 Ver Todos
                 <i className="ri-arrow-right-line"></i>
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-1">
               {projectDetails
                 .filter((p) => p.id !== project.id)
                 .slice(0, 3)
@@ -281,20 +287,20 @@ export default function ProjectDetail() {
                       to={`/proyecto/${p.slug}`}
                       className="group bg-[#111] border border-[#1e1e1e] hover:border-[#c0c0c0]/30 transition-all duration-500 overflow-hidden"
                     >
-                      <div className="relative overflow-hidden h-48">
+                      <div className="relative overflow-hidden h-44 md:h-48">
                         <ProjectImage
                           alt={p.title}
                           className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                          fallbackSrc={p.image}
-                          src={pLocal[0] || p.image}
+                          fallbackSrc=""
+                          src={pLocal[0] || ''}
                         />
                         <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
                       </div>
-                      <div className="p-5">
+                      <div className="p-4 md:p-5">
                         <span className="text-[10px] tracking-[0.3em] uppercase text-[#c0c0c0] border border-[#c0c0c0]/20 px-2 py-0.5">
                           {p.category}
                         </span>
-                        <h4 className="text-lg font-bold text-white tracking-wider mt-3 group-hover:text-[#c0c0c0] transition-colors duration-300">
+                        <h4 className="text-base md:text-lg font-bold text-white tracking-wider mt-3 group-hover:text-[#c0c0c0] transition-colors duration-300">
                           {p.title}
                         </h4>
                       </div>

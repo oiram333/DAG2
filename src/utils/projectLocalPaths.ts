@@ -24,5 +24,9 @@ export const PROJECT_LOCAL_PREFIXES: Record<number, { prefix: string; count: num
 export function getLocalImagePaths(projectId: number): string[] {
   const p = PROJECT_LOCAL_PREFIXES[projectId];
   if (!p || p.count === 0) return [];
-  return Array.from({ length: p.count }, (_, i) => `/projects/${p.prefix}_${i + 1}.jpg`);
+  const base = __BASE_PATH__ || '/';
+  return Array.from(
+    { length: p.count },
+    (_, i) => `${base}projects/${p.prefix}_${i + 1}.jpg`
+  );
 }

@@ -22,24 +22,16 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#050505] border-t border-[#1a1a1a]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-8">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-20 h-20 flex items-center justify-center">
+            <div className="flex items-center mb-2">
+              <div className="h-[120px] flex items-center justify-center leading-[0]">
                 <img
                   alt="DAG2 Logo"
-                  className="w-full h-full object-cover"
-                  src="https://storage.readdy-site.link/project_files/02c32817-8248-40ea-9a96-6d2ba401544b/13bfb51b-e23d-4447-a5f2-9c012e0a9f97_Copilot_20260512_173000.png?v=d6b7605c7d2f1c11bcfa6590c2029479"
+                  className="h-full w-auto object-contain"
+                  src="https://storage.readdy-site.link/project_files/02c32817-8248-40ea-9a96-6d2ba401544b/e05b4835-80e4-457e-88bf-2bb810f739fd_DAG2.png?v=e39a859bb68c17890e057d199986c9d8"
                 />
-              </div>
-              <div>
-                <h2 className="text-4xl font-black tracking-[0.1em] text-white">
-                  DAG<span className="text-[#c0c0c0]">2</span>
-                </h2>
-                <p className="text-xs tracking-[0.4em] text-[#444] uppercase mt-1">
-                  Construcciones S.A. de C.V.
-                </p>
               </div>
             </div>
             <p className="text-[#555] text-sm leading-relaxed max-w-xs mb-8">
@@ -61,14 +53,6 @@ export default function Footer() {
                 className="w-9 h-9 flex items-center justify-center border border-[#222] text-[#555] hover:text-[#c0c0c0] hover:border-[#c0c0c0]/30 transition-all duration-300 cursor-pointer"
               >
                 <i className="ri-facebook-circle-line text-sm"></i>
-              </a>
-              <a
-                href={contactInfo.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 flex items-center justify-center border border-[#222] text-[#555] hover:text-[#c0c0c0] hover:border-[#c0c0c0]/30 transition-all duration-300 cursor-pointer"
-              >
-                <i className="ri-linkedin-box-line text-sm"></i>
               </a>
               <a
                 href={`https://wa.me/${contactInfo.whatsappNumber}`}
