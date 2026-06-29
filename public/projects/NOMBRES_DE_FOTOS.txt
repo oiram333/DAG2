@@ -1,0 +1,22 @@
+CARPETAS DE FOTOS — 18 proyectos (numeración del 1 al 18):
+
+1  - Trincheras para instalación eléctrica
+2  - Área de Lactancia
+3  - Mantenimiento Eléctrico
+4  - Pintura Epóxica en Cocina y Alacena
+5  - Pintura Epóxica en Exterior - Área de Descarga
+6  - Elevador de Material en Área de Almacén
+7  - Pintura Epóxica en Interior de Nave
+8  - Trampa de Grasas
+9  - Bodega de Almacenamiento
+10 - Terraza
+11 - Monumento Institucional
+12 - Sala de Orgullo Lince
+13 - Sala de Titulación
+14 - Tienda 3B
+15 - Sala de Titulación Campus II TECNM
+16 - Adecuación de Oficinas Administrativas
+17 - Rehabilitación y Mantenimiento Sabes
+18 - Habilitado de Instalaciones Mubea
+
+Cada carpeta debe contener hasta 6 fotos: 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg

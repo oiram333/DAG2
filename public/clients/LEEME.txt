@@ -1,0 +1,3 @@
+# Coloca aquí los logos de tus clientes
+# Nombra los archivos como: 1.png, 2.png, 3.png... (PNG con fondo transparente para mejores resultados)
+# La web detectará automáticamente cuántos subiste (hasta 30)
