@@ -55,7 +55,7 @@ export default function AboutSection() {
             </h2>
             <div className="hidden md:block w-px h-20 bg-[#333] mb-2" />
             <p className="hidden md:block text-[#666] text-sm leading-relaxed max-w-xs mb-2">
-              Empresa comprometida con la excelencia constructiva y el diseño de espacios que inspirar.
+              Empresa comprometida con la excelencia constructiva y el diseño de espacios que inspiran.
             </p>
           </div>
         </div>
@@ -76,11 +76,14 @@ export default function AboutSection() {
           </div>
 
           <div className={`relative transition-all duration-700 delay-200 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <img
-              alt="DAG2 equipo"
-              className="w-full h-80 object-cover object-center"
-              src="https://storage.readdy-site.link/project_files/02c32817-8248-40ea-9a96-6d2ba401544b/ec7a1fa5-1952-4983-9c68-e62f8d0eaebd_compressed_WhatsApp-Image-2026-05-21-at-15.32.05-1.webp"
-            />
+            <div className="relative">
+              <img
+                alt="DAG2 equipo"
+                className="w-full h-80 object-cover object-center"
+                src="https://storage.readdy-site.link/project_files/02c32817-8248-40ea-9a96-6d2ba401544b/ec7a1fa5-1952-4983-9c68-e62f8d0eaebd_compressed_WhatsApp-Image-2026-05-21-at-15.32.05-1.webp"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/80" />
+            </div>
             <div className="absolute -bottom-4 -left-4 w-24 h-24 border border-[#c0c0c0]/30" />
             <div className="absolute -top-4 -right-4 w-16 h-16 border border-[#c0c0c0]/20" />
           </div>
