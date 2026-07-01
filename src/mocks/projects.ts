@@ -310,7 +310,7 @@ export const projectDetails: ProjectDetail[] = [
     area: '220 m²',
     image: '',
     images: [],
-    description: 'Adecuación de oficinas administrativas en área de mantenimiento a base de muros divisorios de panel de yeso, plafones reticulares; adecuación de instalación eléctrica, sistema de aires acondicionados y acabados en general.',
+    description: 'Adecuación de oficinas administrativas en área de mantenimiento a base de muros divisorios de panel de cemento, plafones; adecuación de instalación eléctrica, sistema de aires acondicionados y acabados en general.',
     scope: [
       'Obra civil',
       'Intervención en subestación eléctrica e interconexiones',
