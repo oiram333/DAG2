@@ -1,12 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { contactInfo } from '@/mocks/home';
 
+interface FieldErrors {
+  name?: string;
+  phone?: string;
+  message?: string;
+}
+
 export default function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [visible, setVisible] = useState(false);
-  const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [charCount, setCharCount] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -17,33 +24,53 @@ export default function ContactSection() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.phone || !formData.message) return;
-    setSubmitting(true);
-    try {
-      const params = new URLSearchParams();
-      params.append('name', formData.name);
-      params.append('phone', formData.phone);
-      params.append('message', formData.message);
-      await fetch('https://readdy.ai/api/form/d81qsotimqud1mmjgktg', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString(),
-      });
-      setSubmitted(true);
-      setFormData({ name: '', phone: '', message: '' });
-      setTimeout(() => setSubmitted(false), 4000);
-    } catch (err) {
-      console.error('Error enviando formulario:', err);
-    } finally {
-      setSubmitting(false);
-    }
+  const validateFields = (name: string, phone: string, message: string): FieldErrors => {
+    const errors: FieldErrors = {};
+    if (!name.trim()) errors.name = 'El nombre es obligatorio';
+    if (!phone.trim()) errors.phone = 'El teléfono es obligatorio';
+    if (!message.trim()) errors.message = 'El mensaje es obligatorio';
+    return errors;
   };
 
-  const handleWhatsApp = () => {
-    const text = `Hola, soy ${formData.name || 'un cliente interesado'}. ${formData.message || 'Me gustaría solicitar una cotización.'}`;
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFieldErrors({});
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const name = (formData.get('name') as string || '').trim();
+    const phone = (formData.get('phone') as string || '').trim();
+    const message = (formData.get('message') as string || '').trim();
+    const companyAlt = (formData.get('company_alt') as string || '').trim();
+
+    // Honeypot check — silently "succeed" but don't actually open WhatsApp
+    if (companyAlt) {
+      setSubmitted(true);
+      form.reset();
+      setCharCount(0);
+      setTimeout(() => setSubmitted(false), 4000);
+      return;
+    }
+
+    // Validate all fields and show errors
+    const errors = validateFields(name, phone, message);
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+
+    // Build WhatsApp message, include name, phone, and message
+    const text = `Hola, soy ${name}. Teléfono: ${phone}. ${message}`;
+
+    // Open WhatsApp in a new tab
     window.open(`https://wa.me/${contactInfo.whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank');
+
+    // Show success and reset form
+    setSubmitted(true);
+    form.reset();
+    setCharCount(0);
+    setTimeout(() => setSubmitted(false), 4000);
   };
 
   return (
@@ -112,50 +139,76 @@ export default function ContactSection() {
                   <p className="text-[#666]">Nos pondremos en contacto contigo pronto.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5" data-readdy-form id="contact-form">
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" data-readdy-form id="contact-form">
+                  {/* Honeypot anti-spam — oculto con CSS en index.css */}
+                  <input
+                    type="text"
+                    name="company_alt"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    readOnly
+                    className="form-honeypot"
+                  />
+
                   <div>
                     <input
                       name="name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Nombre completo"
-                      className="w-full bg-transparent border border-[#2a2a2a] text-white text-sm px-4 py-3.5 focus:outline-none focus:border-[#c0c0c0]/50 transition-colors duration-300 placeholder-[#444]"
+                      className={`w-full bg-transparent border text-white text-sm px-4 py-3.5 focus:outline-none transition-colors duration-300 placeholder-[#444] ${fieldErrors.name ? 'border-red-500/60' : 'border-[#2a2a2a] focus:border-[#c0c0c0]/50'}`}
                       required
                     />
+                    {fieldErrors.name && (
+                      <p className="text-red-400/80 text-xs mt-1.5 flex items-center gap-1.5">
+                        <i className="ri-error-warning-line"></i>
+                        {fieldErrors.name}
+                      </p>
+                    )}
                   </div>
+
                   <div>
                     <input
                       name="phone"
                       type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="Teléfono de contacto"
-                      className="w-full bg-transparent border border-[#2a2a2a] text-white text-sm px-4 py-3.5 focus:outline-none focus:border-[#c0c0c0]/50 transition-colors duration-300 placeholder-[#444]"
+                      className={`w-full bg-transparent border text-white text-sm px-4 py-3.5 focus:outline-none transition-colors duration-300 placeholder-[#444] ${fieldErrors.phone ? 'border-red-500/60' : 'border-[#2a2a2a] focus:border-[#c0c0c0]/50'}`}
                       required
                     />
+                    {fieldErrors.phone && (
+                      <p className="text-red-400/80 text-xs mt-1.5 flex items-center gap-1.5">
+                        <i className="ri-error-warning-line"></i>
+                        {fieldErrors.phone}
+                      </p>
+                    )}
                   </div>
+
                   <div>
                     <textarea
                       name="message"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Describe tu proyecto o consulta..."
                       rows={5}
                       maxLength={500}
-                      className="w-full bg-transparent border border-[#2a2a2a] text-white text-sm px-4 py-3.5 focus:outline-none focus:border-[#c0c0c0]/50 transition-colors duration-300 placeholder-[#444] resize-none"
+                      onChange={(e) => setCharCount(e.target.value.length)}
+                      className={`w-full bg-transparent border text-white text-sm px-4 py-3.5 focus:outline-none transition-colors duration-300 placeholder-[#444] resize-none ${fieldErrors.message ? 'border-red-500/60' : 'border-[#2a2a2a] focus:border-[#c0c0c0]/50'}`}
                       required
                     />
                     <div className="flex justify-between mt-1">
-                      <span className="text-[#444] text-xs ml-auto">{formData.message.length}/500</span>
+                      {fieldErrors.message && (
+                        <p className="text-red-400/80 text-xs flex items-center gap-1.5">
+                          <i className="ri-error-warning-line"></i>
+                          {fieldErrors.message}
+                        </p>
+                      )}
+                      <span className="text-[#444] text-xs ml-auto">{charCount}/500</span>
                     </div>
                   </div>
+
                   <button
                     type="submit"
-                    disabled={submitting}
-                    className="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1ea855] text-white text-sm tracking-[0.2em] uppercase py-4 transition-all duration-300 cursor-pointer whitespace-nowrap disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1ea855] text-white text-sm tracking-[0.2em] uppercase py-4 transition-all duration-300 cursor-pointer whitespace-nowrap"
                   >
                     <i className="ri-whatsapp-line text-lg"></i>
-                    {submitting ? 'Enviando...' : 'Enviar por WhatsApp'}
+                    Enviar por WhatsApp
                   </button>
                   <p className="text-[#444] text-xs text-center leading-relaxed">
                     Al enviar, se abrirá WhatsApp con tu mensaje listo para enviar a nuestro equipo.
