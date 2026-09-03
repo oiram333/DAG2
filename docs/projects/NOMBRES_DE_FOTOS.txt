@@ -18,6 +18,5 @@ CARPETAS DE FOTOS — 18 proyectos (numeración del 1 al 18):
 16 - Adecuación de Oficinas Administrativas
 17 - Rehabilitación y Mantenimiento Sabes
 18 - Habilitado de Instalaciones Mubea
-19 - Proyecto Casa Habitación
 
 Cada carpeta debe contener hasta 6 fotos: 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg
