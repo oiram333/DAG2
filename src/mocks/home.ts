@@ -150,9 +150,7 @@ export const metrics = [
 ];
 
 export const contactInfo = {
-  phones: ['461 126 6752'],
   email: 'dag2co@yahoo.com',
-  whatsappNumber: '524611266752',
   social: {
     facebook: 'https://www.facebook.com/share/1EE9V6PtBu/',
     instagram: 'https://www.instagram.com/dag2_co?igsh=MjdkZjQyMGo2Z3o3',

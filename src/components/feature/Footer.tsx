@@ -54,14 +54,6 @@ export default function Footer() {
               >
                 <i className="ri-facebook-circle-line text-sm"></i>
               </a>
-              <a
-                href={`https://wa.me/${contactInfo.whatsappNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 flex items-center justify-center border border-[#222] text-[#555] hover:text-[#c0c0c0] hover:border-[#c0c0c0]/30 transition-all duration-300 cursor-pointer"
-              >
-                <i className="ri-whatsapp-line text-sm"></i>
-              </a>
             </div>
           </div>
 
@@ -90,14 +82,6 @@ export default function Footer() {
           <div>
             <p className="text-[10px] tracking-[0.4em] text-[#444] uppercase mb-6">Contacto</p>
             <ul className="space-y-4">
-              {contactInfo.phones.map((phone) => (
-                <li key={phone} className="flex items-center gap-3">
-                  <i className="ri-phone-line text-[#c0c0c0]/50 text-sm"></i>
-                  <a href={`tel:+52${phone.replace(/\s/g, '')}`} className="text-[#555] hover:text-[#c0c0c0] text-sm transition-colors cursor-pointer">
-                    {phone}
-                  </a>
-                </li>
-              ))}
               <li className="flex items-center gap-3">
                 <i className="ri-mail-line text-[#c0c0c0]/50 text-sm"></i>
                 <a href={`mailto:${contactInfo.email}`} className="text-[#555] hover:text-[#c0c0c0] text-sm transition-colors cursor-pointer">

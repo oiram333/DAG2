@@ -3,7 +3,7 @@ import { contactInfo } from '@/mocks/home';
 
 interface FieldErrors {
   name?: string;
-  phone?: string;
+  email?: string;
   message?: string;
 }
 
@@ -24,10 +24,14 @@ export default function ContactSection() {
     return () => observer.disconnect();
   }, []);
 
-  const validateFields = (name: string, phone: string, message: string): FieldErrors => {
+  const validateFields = (name: string, email: string, message: string): FieldErrors => {
     const errors: FieldErrors = {};
     if (!name.trim()) errors.name = 'El nombre es obligatorio';
-    if (!phone.trim()) errors.phone = 'El teléfono es obligatorio';
+    if (!email.trim()) {
+      errors.email = 'El correo es obligatorio';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = 'Ingresa un correo válido';
+    }
     if (!message.trim()) errors.message = 'El mensaje es obligatorio';
     return errors;
   };
@@ -40,11 +44,11 @@ export default function ContactSection() {
     const formData = new FormData(form);
 
     const name = (formData.get('name') as string || '').trim();
-    const phone = (formData.get('phone') as string || '').trim();
+    const email = (formData.get('email') as string || '').trim();
     const message = (formData.get('message') as string || '').trim();
     const companyAlt = (formData.get('company_alt') as string || '').trim();
 
-    // Honeypot check — silently "succeed" but don't actually open WhatsApp
+    // Honeypot check — silently "succeed" but don't actually open the mail client
     if (companyAlt) {
       setSubmitted(true);
       form.reset();
@@ -54,17 +58,18 @@ export default function ContactSection() {
     }
 
     // Validate all fields and show errors
-    const errors = validateFields(name, phone, message);
+    const errors = validateFields(name, email, message);
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
       return;
     }
 
-    // Build WhatsApp message, include name, phone, and message
-    const text = `Hola, soy ${name}. Teléfono: ${phone}. ${message}`;
+    // Build the email draft and open the user's mail client
+    const subject = 'Nuevo mensaje de contacto';
+    const body = `Nombre: ${name}\nCorreo: ${email}\n\n${message}`;
+    const mailto = `mailto:${contactInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-    // Open WhatsApp in a new tab
-    window.open(`https://wa.me/${contactInfo.whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank');
+    window.location.href = mailto;
 
     // Show success and reset form
     setSubmitted(true);
@@ -90,18 +95,6 @@ export default function ContactSection() {
             </p>
 
             <div className="space-y-8">
-              {contactInfo.phones.slice(0, 1).map((phone) => (
-                <a key={phone} href={`https://wa.me/${contactInfo.whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group cursor-pointer">
-                  <div className="w-12 h-12 flex items-center justify-center border border-[#2a2a2a] group-hover:border-[#c0c0c0]/40 transition-colors duration-300">
-                    <i className="ri-whatsapp-line text-[#c0c0c0] text-lg"></i>
-                  </div>
-                  <div>
-                    <p className="text-[#444] text-xs tracking-[0.3em] uppercase mb-1">WhatsApp</p>
-                    <p className="text-[#bbb] text-sm group-hover:text-white transition-colors duration-300">{phone}</p>
-                  </div>
-                </a>
-              ))}
-
               <a href={`mailto:${contactInfo.email}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 group cursor-pointer">
                 <div className="w-12 h-12 flex items-center justify-center border border-[#2a2a2a] group-hover:border-[#c0c0c0]/40 transition-colors duration-300">
                   <i className="ri-mail-line text-[#c0c0c0] text-lg"></i>
@@ -111,8 +104,6 @@ export default function ContactSection() {
                   <p className="text-[#bbb] text-sm group-hover:text-white transition-colors duration-300">{contactInfo.email}</p>
                 </div>
               </a>
-
-
             </div>
 
             <div className="flex items-center gap-1 mt-12">
@@ -128,15 +119,15 @@ export default function ContactSection() {
 
           <div className={`transition-all duration-700 delay-200 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="border border-[#1e1e1e] p-8 md:p-10">
-              <h3 className="text-xl font-bold text-white tracking-wider mb-8">Enviar Mensaje por WhatsApp</h3>
+              <h3 className="text-xl font-bold text-white tracking-wider mb-8">Enviar Mensaje por Correo</h3>
 
               {submitted ? (
                 <div className="text-center py-12">
                   <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[#c0c0c0]/30">
                     <i className="ri-check-line text-[#c0c0c0] text-3xl"></i>
                   </div>
-                  <h4 className="text-lg font-semibold text-white mb-2">¡Mensaje enviado!</h4>
-                  <p className="text-[#666]">Nos pondremos en contacto contigo pronto.</p>
+                  <h4 className="text-lg font-semibold text-white mb-2">¡Correo preparado!</h4>
+                  <p className="text-[#666]">Se abrió tu bandeja de correo. Solo dale a enviar.</p>
                 </div>
               ) : (
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" data-readdy-form id="contact-form">
@@ -168,16 +159,16 @@ export default function ContactSection() {
 
                   <div>
                     <input
-                      name="phone"
-                      type="tel"
-                      placeholder="Teléfono de contacto"
-                      className={`w-full bg-transparent border text-white text-sm px-4 py-3.5 focus:outline-none transition-colors duration-300 placeholder-[#444] ${fieldErrors.phone ? 'border-red-500/60' : 'border-[#2a2a2a] focus:border-[#c0c0c0]/50'}`}
+                      name="email"
+                      type="email"
+                      placeholder="Correo electrónico"
+                      className={`w-full bg-transparent border text-white text-sm px-4 py-3.5 focus:outline-none transition-colors duration-300 placeholder-[#444] ${fieldErrors.email ? 'border-red-500/60' : 'border-[#2a2a2a] focus:border-[#c0c0c0]/50'}`}
                       required
                     />
-                    {fieldErrors.phone && (
+                    {fieldErrors.email && (
                       <p className="text-red-400/80 text-xs mt-1.5 flex items-center gap-1.5">
                         <i className="ri-error-warning-line"></i>
-                        {fieldErrors.phone}
+                        {fieldErrors.email}
                       </p>
                     )}
                   </div>
@@ -205,13 +196,13 @@ export default function ContactSection() {
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1ea855] text-white text-sm tracking-[0.2em] uppercase py-4 transition-all duration-300 cursor-pointer whitespace-nowrap"
+                    className="w-full flex items-center justify-center gap-3 bg-[#c0c0c0] hover:bg-white text-black text-sm tracking-[0.2em] uppercase py-4 transition-all duration-300 cursor-pointer whitespace-nowrap"
                   >
-                    <i className="ri-whatsapp-line text-lg"></i>
-                    Enviar por WhatsApp
+                    <i className="ri-mail-send-line text-lg"></i>
+                    Enviar por correo
                   </button>
                   <p className="text-[#444] text-xs text-center leading-relaxed">
-                    Al enviar, se abrirá WhatsApp con tu mensaje listo para enviar a nuestro equipo.
+                    Al enviar, se abrirá tu bandeja de correo con el mensaje listo para mandar.
                   </p>
                 </form>
               )}

@@ -45,13 +45,10 @@ export const home = {
     subtitle: 'Estamos listos para hacer realidad tu próximo proyecto. Escríbenos y te responderemos a la brevedad.',
     form: {
       name: 'Nombre',
-      phone: 'Teléfono',
       message: 'Mensaje',
       submit: 'Enviar Mensaje',
-      sendWhatsApp: 'Enviar por WhatsApp',
     },
     info: {
-      phones: 'Teléfonos',
       email: 'Correo Electrónico',
       address: 'Dirección',
       followUs: 'Síguenos',
